@@ -1,0 +1,43 @@
+import pygame
+import sys
+
+# Inicializar Pygame
+pygame.init()
+
+# Definir dimensiones de la ventana
+width = 800
+height = 800
+
+# Crear la ventana
+window = pygame.display.set_mode((width, height))
+
+# Cargar imágenes de las casillas del tablero
+white_square_img = pygame.image.load("white_square.png")
+black_square_img = pygame.image.load("black_square.png")
+
+# Tamaño de cada casilla del tablero
+square_size = width // 8  # Dividir el ancho de la ventana por 8 para obtener el tamaño de cada casilla
+
+# Función para dibujar el tablero de ajedrez
+def draw_board():
+    for row in range(8):
+        for col in range(8):
+            # Alternar entre las imágenes de las casillas blancas y negras
+            if (row + col) % 2 == 0:
+                square_img = white_square_img
+            else:
+                square_img = black_square_img
+            
+            # Dibujar la casilla en la posición correcta
+            window.blit(square_img, (col * square_size, row * square_size))
+
+# Loop principal
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    window.fill((255, 255, 255))  # Llenar la ventana de blanco
+    draw_board()  # Dibujar el tablero de ajedrez
+    pygame.display.update()  # Actualizar la pantalla
